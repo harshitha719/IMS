@@ -3,6 +3,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import Constant.IMSConstants;
 import Manager.IMSManager;
@@ -54,7 +55,7 @@ public void readInputFromUser() throws IOException{
 			
 		}
 		else if(this.getSelectedInput().equalsIgnoreCase(constants.FOUR)) {
-			
+			addRecordmenu();
 		}
 		else {
 			System.out.println("Please select valid number from Menu");
@@ -89,6 +90,63 @@ private void searchProduct() throws IOException {
 		searchProduct();
 	}
 }
+
+
+private void addRecordmenu() throws IOException{
+	
+	Scanner sc = new Scanner(System.in);
+	IMSManager manager = new IMSManager();
+		
+	String mainMenuContd = "Y"; 	
+	while (mainMenuContd.equalsIgnoreCase("Y")){
+		
+		System.out.println("Menu 4 \n\n" 			
+				+ "	1. Add Record \n"
+				+"	2. Remove Record \n"
+				+"	3. Change record \n"
+				+"	4. Main Menu \n");
+		System.out.println("\n Make a selection from the menu in the format 4.x");
+		String selection = sc.nextLine();
+		String submenuContd = "Y";	
+		
+		while (submenuContd.equalsIgnoreCase("Y")){
+
+			switch (selection) {
+			case "4.1":
+				manager.addRecord(this.getDataFile() + constants.TXT);
+				System.out.println("Do you want to add more Y/N?");
+				submenuContd = sc.nextLine();
+				break;
+				
+			case "4.2":
+				System.out.println("\n Choose between DeleteByProductId or DeleteByProductName ID/NAME");
+				String choice = sc.nextLine();
+				manager.deleteRecord(this.getDataFile() + constants.TXT, choice);
+				System.out.println("Do you want to remove more Y/N?");
+				submenuContd = sc.nextLine();
+				break;
+
+			case "4.3":
+				manager.modifyRecord(this.getDataFile() + constants.TXT);
+				System.out.println("Do you want to update more Y/N?");
+				submenuContd = sc.nextLine();
+				break;
+				
+			default:
+				manager.createBackup(this.getDataFile() + constants.TXT);
+				startPoint();
+				break;
+			}				
+					
+		}
+		System.out.println("Do you want to perform another menu operation Y/N?");
+		mainMenuContd = sc.nextLine();
+	}
+	
+	sc.close();
+}
+
+
 
 public String getSelectedInput() {
 	return selectedInput;
