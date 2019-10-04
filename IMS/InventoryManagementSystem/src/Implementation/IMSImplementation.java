@@ -3,6 +3,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Map;
 
 import Constant.IMSConstants;
 import Manager.IMSManager;
@@ -20,8 +21,8 @@ public String dataFile;
 public BufferedReader brReader = null;
 public Boolean display = Boolean.FALSE;
 public Boolean firstTime = Boolean.TRUE;
-public TreeMap<String,ArrayList<String>> productMap = null;
-public TreeMap<String,ArrayList<String>>  productIDMap = null;
+public Map<String,ArrayList<String>> productMap = null;
+public Map<String,ArrayList<String>>  productIDMap = null;
 public int count = 0;
 public ArrayList<String> dataFileList = null;
 

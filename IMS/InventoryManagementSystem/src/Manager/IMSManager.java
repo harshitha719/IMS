@@ -9,16 +9,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Scanner;
 
 import Constant.IMSConstants;
-
-import java.util.Scanner;
-import java.util.TreeMap;
-import java.util.stream.Stream;
-
 import Implementation.IMSImplementation;
 
 public class IMSManager {
@@ -29,11 +23,11 @@ public class IMSManager {
 		"Enter 6 to exit" ) ;
 		imsImplementation.brReader = new BufferedReader(new InputStreamReader(System.in));
 		imsImplementation.setSelectedInput(imsImplementation.brReader.readLine());
-		if (imsImplementation.getSelectedInput().equalsIgnoreCase("0")) {
+		if (imsImplementation.getSelectedInput().equalsIgnoreCase(IMSConstants.ZERO)) {
 			imsImplementation.firstTime = Boolean.FALSE;
 			imsImplementation.startPoint();
 		}
-		if (imsImplementation.getSelectedInput().equalsIgnoreCase("6")) {
+		if (imsImplementation.getSelectedInput().equalsIgnoreCase(IMSConstants.SIX)) {
 			clearConsole();
 		}
 		
@@ -46,7 +40,6 @@ public class IMSManager {
 		searchProduct = imsImplementation.brReader.readLine();
 		if(searchProduct!=null) {
 			if(imsImplementation.productMap!=null && imsImplementation.productIDMap!=null ) {
-				
 					for (Entry<String, ArrayList<String>> entry : imsImplementation.productMap.entrySet())  {
 						if(entry.getKey().equalsIgnoreCase(searchProduct)) {
 							productExist=Boolean.TRUE;
@@ -72,7 +65,7 @@ public class IMSManager {
 		
 		if(productExist==Boolean.FALSE)
 			System.out.println(IMSConstants.ERRORPRODUCTNOTPRESENT);
-		redirect(imsImplementation);
+			redirect(imsImplementation);
 		}
 	
 	
@@ -118,25 +111,24 @@ public class IMSManager {
 				}
 			}
 			if(imsImplementation.dataFileList!=null) {
-				 imsImplementation.productMap = new TreeMap<String,ArrayList<String>>();
-				 imsImplementation.productIDMap = new TreeMap<String,ArrayList<String>>();
-				ArrayList<String> productList = null;
-				ArrayList<String> productIDList = null;
+				 imsImplementation.productMap = new HashMap<String,ArrayList<String>>();
+				 imsImplementation.productIDMap = new HashMap<String,ArrayList<String>>();
+				ArrayList<String> listValues = null;
 				for (String list:imsImplementation.dataFileList) {
 					String[] words=list.split(" ");
 						if(words[1] != "Product" && imsImplementation.productMap.containsKey(words[1])) {
 							imsImplementation.productMap.get(words[1]).add(list);
 						} else {
-							productList = new ArrayList<String>();
-							productList.add(list);
-							imsImplementation.productMap.put(words[1], productList);
+							listValues = new ArrayList<String>();
+							listValues.add(list);
+							imsImplementation.productMap.put(words[1], listValues);
 						}
 						if(words[0] != "ProductID" && imsImplementation.productIDMap.containsKey(words[0])) {
 							imsImplementation.productIDMap.get(words[0]).add(list);
 						} else {
-							productIDList = new ArrayList<String>();
-							productIDList.add(list);
-							imsImplementation.productIDMap.put(words[0], productIDList);
+							listValues = new ArrayList<String>();
+							listValues.add(list);
+							imsImplementation.productIDMap.put(words[0], listValues);
 						}
 					}
 			}
