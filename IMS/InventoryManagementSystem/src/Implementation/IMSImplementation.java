@@ -1,118 +1,182 @@
 package Implementation;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Scanner;
 
 import Constant.IMSConstants;
 import Manager.IMSManager;
 
-
-import java.util.TreeMap;
-
-
 public class IMSImplementation {
 
+	public IMSManager manager;
+	public String selectedInput;
+	public String dataFile;
+	public BufferedReader brReader = null;
+	public Boolean display = Boolean.FALSE;
+	public Boolean firstTime = Boolean.TRUE;
+	public Map<String, ArrayList<String>> productMap = null;
+	public Map<String, ArrayList<String>> productIDMap = null;
+	public int count = 0;
+	public ArrayList<String> dataFileList = null;
 
-public IMSManager manager;
-public String selectedInput;
-public String dataFile;
-public BufferedReader brReader = null;
-public Boolean display = Boolean.FALSE;
-public Boolean firstTime = Boolean.TRUE;
-public Map<String,ArrayList<String>> productMap = null;
-public Map<String,ArrayList<String>>  productIDMap = null;
-public int count = 0;
-public ArrayList<String> dataFileList = null;
-
-public void startPoint() throws IOException {
-	manager = new IMSManager();
-	System.out.println("IMS Main Menu");
-	System.out.println("1. Input Data \n" +
-			"2. Search Inventory \n" +
-			"3. Show Inventory \n" +
-			"4. Change record \n" +
-			"5. Mail \n" +
-			"6. Exit");
-	if(firstTime) {
-		this.setDataFile(IMSConstants.HARDWARE);
-	}
-	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-	System.out.println(IMSConstants.ENTERMAINMENU);
-	this.setSelectedInput(br.readLine());
-	manager.defaultDataFileRead(this, display);
-	this.readInputFromUser();
-}
-
-public void readInputFromUser() throws IOException{
-	if(this.getSelectedInput()!=null) {
-		if (this.getSelectedInput().equalsIgnoreCase(IMSConstants.ONE)) {
-			manager.readDataFile(this);
+	public void startPoint() throws IOException {
+		manager = new IMSManager();
+		System.out.println("IMS Main Menu");
+		System.out.println("1. Input Data \n" + "2. Search Inventory \n" + "3. Show Inventory \n"
+				+ "4. Change record \n" + "5. Mail \n" + "6. Exit");
+		if (firstTime) {
+			this.setDataFile(IMSConstants.HARDWARE);
 		}
-		else if(this.getSelectedInput().equalsIgnoreCase(IMSConstants.TWO)) {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println(IMSConstants.ENTERMAINMENU);
+		this.setSelectedInput(br.readLine());
+		manager.defaultDataFileRead(this, display);
+		this.readInputFromUser();
+	}
+
+	public void readInputFromUser() throws IOException {
+		if (this.getSelectedInput() != null) {
+			if (this.getSelectedInput().equalsIgnoreCase(IMSConstants.ONE)) {
+				manager.readDataFile(this);
+			} else if (this.getSelectedInput().equalsIgnoreCase(IMSConstants.TWO)) {
+				searchProduct();
+			} else if (this.getSelectedInput().equalsIgnoreCase(IMSConstants.THREE)) {
+
+			} else if (this.getSelectedInput().equalsIgnoreCase(IMSConstants.FOUR)) {
+				addRecordmenu();
+//				firstTime = false;
+				IMSManager.redirect(this);
+			} else if (this.getSelectedInput().equalsIgnoreCase(IMSConstants.FIVE)) {
+
+			} else if (this.getSelectedInput().equalsIgnoreCase(IMSConstants.SIX)) {
+				IMSManager.clearConsole();
+			} else {
+				System.out.println("Please select valid number from Menu \n");
+				startPoint();
+			}
+		}
+	}
+
+	private void searchProduct() throws IOException {
+		String searchMenu;
+		String searchProduct;
+		System.out.println("Menu 2 \n" + " " + "1. Search Product \n" + " " + "2. Search Product by other attribute \n"
+				+ " " + "3. Main Menu \n");
+		brReader = new BufferedReader(new InputStreamReader(System.in));
+		searchMenu = brReader.readLine();
+		if (searchMenu != null && searchMenu.equalsIgnoreCase(IMSConstants.TWODOTONE)) {
+			manager.searchByproductAndID(this);
+		} else if (searchMenu != null && searchMenu.equalsIgnoreCase(IMSConstants.TWODOTTWO)) {
+			manager.searchByOtherAttribute(this);
+		} else if (searchMenu != null && searchMenu.equalsIgnoreCase(IMSConstants.TWODOTTHREE)) {
+			startPoint();
+		} else {
+			System.out.println(IMSConstants.ERRORINVALIDMENU2);
 			searchProduct();
 		}
-		else if(this.getSelectedInput().equalsIgnoreCase(IMSConstants.THREE)) {
-			
-		}
-		else if(this.getSelectedInput().equalsIgnoreCase(IMSConstants.FOUR)) {
-			
-		}
-		else if(this.getSelectedInput().equalsIgnoreCase(IMSConstants.FIVE)) {
-					
-		}
-		else if(this.getSelectedInput().equalsIgnoreCase(IMSConstants.SIX)) {
-			manager.clearConsole();
-		}
-		else {
-			System.out.println("Please select valid number from Menu \n");
-			startPoint();
-		}
 	}
-}
 
+	private void addRecordmenu() throws IOException {
 
+		Scanner sc = new Scanner(System.in);
+		IMSManager manager = new IMSManager();
+		boolean updateFlag = false;
+		StringBuffer buffer = manager.changeRecordPreProcessor(this.getDataFile());
 
-private void searchProduct() throws IOException {
-	String searchMenu ;
-	String searchProduct;
-	System.out.println("Menu 2 \n" 
-						+ " "
-						+ "1. Search Product \n"
-						+ " "
-						+"2. Search Product by other attribute \n"
-						+ " "
-						+"3. Main Menu \n");
-	brReader = new BufferedReader(new InputStreamReader(System.in));
-	searchMenu=brReader.readLine();
-	if(searchMenu!=null && searchMenu.equalsIgnoreCase(IMSConstants.TWODOTONE)) {
-		manager.searchByproductAndID(this);
+		String mainMenuContd = "Y";
+		while (mainMenuContd.equalsIgnoreCase("Y")) {
+
+			clearscr();
+			System.out.println("Menu 4 \n\n" + "	1. Add Record \n" + "	2. Remove Record \n"
+					+ "	3. Change record \n" + "	4. Main Menu \n");
+			System.out.println("\n Make a selection from the menu in the format 4.x");
+			String selection = sc.nextLine();
+			String submenuContd = "Y";
+
+			while (submenuContd.equalsIgnoreCase("Y")) {
+
+				switch (selection) {
+				case "4.1":
+					updateFlag = manager.addRecord(this.getDataFile() + IMSConstants.TXT, sc);
+					System.out.println("Do you want to add more Y/N?");
+					submenuContd = sc.nextLine();
+					break;
+
+				case "4.2":
+					System.out.println(
+							"\n Choose between DeleteByProductId or DeleteByProductName or DeleteByProductNameAndModel or DeleteByManufacturer.\n"
+									+ "\n\t Applicable choices are : ID / NAME / NAMEANDMODEL / MANUFACTURER");
+					String choice = sc.nextLine();
+					updateFlag = manager.deleteRecord(this.getDataFile() + IMSConstants.TXT, choice, sc);
+					System.out.println("Do you want to remove more Y/N?");
+					submenuContd = sc.nextLine();
+					break;
+
+				case "4.3":
+					updateFlag = manager.modifyRecord(this.getDataFile() + IMSConstants.TXT, sc);
+					System.out.println("Do you want to update more records Y/N?");
+					submenuContd = sc.nextLine();
+					break;
+
+				case "4.4":
+					submenuContd = "N";
+//					if (updateFlag) {
+						manager.createBackup(buffer);
+						System.out.println(
+								"\n 	File backup with the name backup.txt created at the same location of original file.");
+						System.out.println("\n\n	Exiting from the menu.........");
+						mainMenuContd = "N"; 
+					/*
+					  } else { System.out.println("\n	Exiting from the menu.........");
+					  mainMenuContd = "N"; }
+					 */
+					break;
+
+				default:
+					submenuContd = "N";
+					System.out.println("\n Invalid menu selection. Exiting from the sub-menu.....");
+					break;
+				}
+
+			}
+			if (mainMenuContd.equalsIgnoreCase("Y")) {
+				System.out.println("Do you want to continue here or return to main menu Y/N?");
+				mainMenuContd = sc.nextLine();
+			}
+		}
+		if (updateFlag) {
+			manager.createBackup(buffer);
+			System.out.println(
+					"\n 	File backup with the name backup.txt created at the same location of original file.");
+			System.out.println("\n\n	Exiting from the menu.........");
+			mainMenuContd = "N"; 			
+		}
+		sc.close();
 	}
-	else if(searchMenu!=null && searchMenu.equalsIgnoreCase(IMSConstants.TWODOTTWO)) {
-		manager.searchByOtherAttribute(this);
-	}
-	else if(searchMenu!=null && searchMenu.equalsIgnoreCase(IMSConstants.TWODOTTHREE)) {
-	startPoint();
-	}
-	else {
-		System.out.println(IMSConstants.ERRORINVALIDMENU2);
-		searchProduct();
-	}
-}
 
-public String getSelectedInput() {
-	return selectedInput;
-}
+	public static void clearscr() {
+		for (int i = 0; i < 50; ++i)
+			System.out.println();
+	}
 
-public void setSelectedInput(String selectedInput) {
-	this.selectedInput = selectedInput;
-}
-public String getDataFile() {
-	return dataFile;
-}
-public void setDataFile(String dataFile) {
-	this.dataFile = dataFile;
-}
+	public String getSelectedInput() {
+		return selectedInput;
+	}
+
+	public void setSelectedInput(String selectedInput) {
+		this.selectedInput = selectedInput;
+	}
+
+	public String getDataFile() {
+		return dataFile;
+	}
+
+	public void setDataFile(String dataFile) {
+		this.dataFile = dataFile;
+	}
 
 }
