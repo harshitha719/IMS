@@ -140,7 +140,7 @@ public class IMSManager {
 		}
 	}
 
-	public boolean addRecord(String filename, Scanner sc) {
+	public boolean addRecord(String filename, BufferedReader brReader) {
 
 		boolean updateFlag = false;
 		IMSImplementation.clearscr();
@@ -150,12 +150,22 @@ public class IMSManager {
 			System.out.println("\n\n");
 			
 			System.out.println("\n Enter the record values to add separated by tab in the format : " + "\n"
-					+ "ProductID   Product  Model Manufacturer  typeCode  LocationCode	MSRP	UNITCOST	DISCOUNTRATE	QTY");
-			String record = sc.nextLine();
+					+ "Product  Model	Manufacturer  typeCode  LocationCode	MSRP	UNITCOST	DISCOUNTRATE	QTY");
+			String record = brReader.readLine();
+			BufferedReader brd = new BufferedReader(new FileReader(file));
+			String strg;
+			String lastRec = "";
+			while ((strg = brd.readLine()) != null) {
+				lastRec = strg;
+			}
+			String[] token = lastRec.split("\t");
+			Integer productId = Integer.parseInt(token[0]) + 1;
+			record = productId.toString() + "\t" + record;			
 			BufferedWriter bw = new BufferedWriter(new FileWriter(file, true));
 			bw.newLine();
 			bw.write(record);
 			bw.close();
+			brd.close();
 			updateFlag = true;			
 
 		} catch (Exception e) {			
@@ -164,7 +174,7 @@ public class IMSManager {
 		return updateFlag;
 	}
 
-	public boolean deleteRecord(String filename, String choice, Scanner sc) {
+	public boolean deleteRecord(String filename, String choice, BufferedReader brReader) {
 
 		boolean updateFlag = false;
 		IMSImplementation.clearscr();
@@ -176,16 +186,16 @@ public class IMSManager {
 			String record;
 			if (choice.equalsIgnoreCase("ID")) {
 				System.out.println("\n Enter the ProductID to delete");
-				record = sc.nextLine();
+				record = brReader.readLine();
 			} else if (choice.equalsIgnoreCase("NAME")) {
 				System.out.println("\n Enter the ProductName to delete");
-				record = sc.nextLine();
+				record = brReader.readLine();
 			} else if (choice.equalsIgnoreCase("NAMEANDMODEL")) {
 				System.out.println("\n Enter the ProductName and Model to delete separated by -. eg. ThinkPad-T40");
-				record = sc.nextLine();
+				record = brReader.readLine();
 			} else {
 				System.out.println("\n Enter the Manufacturer to delete records");
-				record = sc.nextLine();
+				record = brReader.readLine();
 			}
 
 			BufferedReader brd = new BufferedReader(new FileReader(file));
@@ -227,10 +237,12 @@ public class IMSManager {
 				BufferedWriter bw = new BufferedWriter(new FileWriter(file, true));
 				bw.write(buff.toString());
 				bw.close();
+				System.out.println("\n	Requested record successfully deleted.");
 				updateFlag = true;
-			} else
+			} else {
 				System.out.println("\n	Requested record to delete not found. Exiting from the menu.....");
-			updateFlag = false;
+				updateFlag = false;
+			}
 			
 		} catch (Exception e) {			
 			e.printStackTrace();
@@ -239,7 +251,7 @@ public class IMSManager {
 	}
 	
 
-	public boolean modifyRecord(String filename, Scanner sc) {
+	public boolean modifyRecord(String filename, BufferedReader brReader) {
 
 		boolean updateFlag = false;
 		IMSImplementation.clearscr();
@@ -249,13 +261,13 @@ public class IMSManager {
 			System.out.println("\n\n");
 						
 			System.out.println("\n Enter the ProductID to make updates");
-			String record = sc.nextLine();
+			String record = brReader.readLine();
 			System.out.println("\n Enter the column value to update. Press - \n" + "		7 - for MSRP \n"
 					+ "		9 - for DiscountRate \n" + "		10 - for Quantity \n");
-			String column = sc.nextLine();
+			String column = brReader.readLine();
 
 			System.out.println("\n Enter the new value to update");
-			String value = sc.nextLine();
+			String value = brReader.readLine();
 
 			BufferedReader brd = new BufferedReader(new FileReader(file));
 			String strg;
@@ -331,11 +343,13 @@ public class IMSManager {
 				// write the updated and non updated records to same file
 				BufferedWriter bw = new BufferedWriter(new FileWriter(file, true));
 				bw.write(buff.toString());
-				bw.close();				
+				bw.close();			
+				System.out.println("\n	Requested record successfully modified.");
 				updateFlag = true;
-			} else
+			} else {
 				System.out.println("\n	Requested ProductId to modify not found. Exiting from the menu.....");
-			updateFlag = false;
+				updateFlag = false;
+			}
 		} catch (Exception e) {			
 			e.printStackTrace();
 		}

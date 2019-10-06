@@ -81,8 +81,8 @@ public class IMSImplementation {
 	}
 
 	private void addRecordmenu() throws IOException {
-
-		Scanner sc = new Scanner(System.in);
+		
+		brReader = new BufferedReader(new InputStreamReader(System.in));
 		IMSManager manager = new IMSManager();
 		boolean updateFlag = false;
 		StringBuffer buffer = manager.changeRecordPreProcessor(this.getDataFile());
@@ -94,46 +94,43 @@ public class IMSImplementation {
 			System.out.println("Menu 4 \n\n" + "	1. Add Record \n" + "	2. Remove Record \n"
 					+ "	3. Change record \n" + "	4. Main Menu \n");
 			System.out.println("\n Make a selection from the menu in the format 4.x");
-			String selection = sc.nextLine();
+			String selection = brReader.readLine();
 			String submenuContd = "Y";
 
 			while (submenuContd.equalsIgnoreCase("Y")) {
 
 				switch (selection) {
 				case "4.1":
-					updateFlag = manager.addRecord(this.getDataFile() + IMSConstants.TXT, sc);
+					updateFlag = manager.addRecord(this.getDataFile() + IMSConstants.TXT, brReader);
 					System.out.println("Do you want to add more Y/N?");
-					submenuContd = sc.nextLine();
+					submenuContd = brReader.readLine();
 					break;
 
 				case "4.2":
 					System.out.println(
 							"\n Choose between DeleteByProductId or DeleteByProductName or DeleteByProductNameAndModel or DeleteByManufacturer.\n"
 									+ "\n\t Applicable choices are : ID / NAME / NAMEANDMODEL / MANUFACTURER");
-					String choice = sc.nextLine();
-					updateFlag = manager.deleteRecord(this.getDataFile() + IMSConstants.TXT, choice, sc);
+					String choice = brReader.readLine();
+					updateFlag = manager.deleteRecord(this.getDataFile() + IMSConstants.TXT, choice, brReader);
 					System.out.println("Do you want to remove more Y/N?");
-					submenuContd = sc.nextLine();
+					submenuContd = brReader.readLine();
 					break;
 
 				case "4.3":
-					updateFlag = manager.modifyRecord(this.getDataFile() + IMSConstants.TXT, sc);
+					updateFlag = manager.modifyRecord(this.getDataFile() + IMSConstants.TXT, brReader);
 					System.out.println("Do you want to update more records Y/N?");
-					submenuContd = sc.nextLine();
+					submenuContd = brReader.readLine();
 					break;
 
 				case "4.4":
 					submenuContd = "N";
-//					if (updateFlag) {
+					mainMenuContd = "N"; 
+					if (!updateFlag) {
 						manager.createBackup(buffer);
 						System.out.println(
 								"\n 	File backup with the name backup.txt created at the same location of original file.");
 						System.out.println("\n\n	Exiting from the menu.........");
-						mainMenuContd = "N"; 
-					/*
-					  } else { System.out.println("\n	Exiting from the menu.........");
-					  mainMenuContd = "N"; }
-					 */
+					}
 					break;
 
 				default:
@@ -145,7 +142,7 @@ public class IMSImplementation {
 			}
 			if (mainMenuContd.equalsIgnoreCase("Y")) {
 				System.out.println("Do you want to continue here or return to main menu Y/N?");
-				mainMenuContd = sc.nextLine();
+				mainMenuContd = brReader.readLine();
 			}
 		}
 		if (updateFlag) {
@@ -154,8 +151,7 @@ public class IMSImplementation {
 					"\n 	File backup with the name backup.txt created at the same location of original file.");
 			System.out.println("\n\n	Exiting from the menu.........");
 			mainMenuContd = "N"; 			
-		}
-		//sc.close();
+		}		
 	}
 
 	public static void clearscr() {
