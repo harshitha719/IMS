@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 import Constant.IMSConstants;
 import Manager.IMSManager;
+import Manager.IMSManagerMenu3;
 
 public class IMSImplementation {
 
@@ -39,16 +40,18 @@ public class IMSImplementation {
 		this.readInputFromUser();
 	}
 
-	public void readInputFromUser() throws IOException, FileNotFoundException {
+	public void readInputFromUser() throws IOException {
 		if (this.getSelectedInput() != null) {
 			if (this.getSelectedInput().equalsIgnoreCase(IMSConstants.ONE)) {
 				manager.readDataFile(this);
 			} else if (this.getSelectedInput().equalsIgnoreCase(IMSConstants.TWO)) {
 				searchProduct();
 			} else if (this.getSelectedInput().equalsIgnoreCase(IMSConstants.THREE)) {
+				showInventoryMenu();
 
 			} else if (this.getSelectedInput().equalsIgnoreCase(IMSConstants.FOUR)) {
-				addRecordmenu();				
+				addRecordmenu();
+//				firstTime = false;
 				IMSManager.redirect(this);
 			} else if (this.getSelectedInput().equalsIgnoreCase(IMSConstants.FIVE)) {
 
@@ -80,9 +83,9 @@ public class IMSImplementation {
 		}
 	}
 
-	private void addRecordmenu() throws IOException, FileNotFoundException {
+	private void addRecordmenu() throws IOException {
 
-		brReader = new BufferedReader(new InputStreamReader(System.in));
+		Scanner sc = new Scanner(System.in);
 		IMSManager manager = new IMSManager();
 		boolean updateFlag = false;
 		StringBuffer buffer = manager.changeRecordPreProcessor(this.getDataFile());
@@ -94,43 +97,46 @@ public class IMSImplementation {
 			System.out.println("Menu 4 \n\n" + "	1. Add Record \n" + "	2. Remove Record \n"
 					+ "	3. Change record \n" + "	4. Main Menu \n");
 			System.out.println("\n Make a selection from the menu in the format 4.x");
-			String selection = brReader.readLine();
+			String selection = sc.nextLine();
 			String submenuContd = "Y";
 
 			while (submenuContd.equalsIgnoreCase("Y")) {
 
 				switch (selection) {
 				case "4.1":
-					updateFlag = manager.addRecord(this.getDataFile() + IMSConstants.TXT, brReader);
+					updateFlag = manager.addRecord(this.getDataFile() + IMSConstants.TXT, sc);
 					System.out.println("Do you want to add more Y/N?");
-					submenuContd = brReader.readLine();
+					submenuContd = sc.nextLine();
 					break;
 
 				case "4.2":
 					System.out.println(
 							"\n Choose between DeleteByProductId or DeleteByProductName or DeleteByProductNameAndModel or DeleteByManufacturer.\n"
 									+ "\n\t Applicable choices are : ID / NAME / NAMEANDMODEL / MANUFACTURER");
-					String choice = brReader.readLine();
-					updateFlag = manager.deleteRecord(this.getDataFile() + IMSConstants.TXT, choice, brReader);
+					String choice = sc.nextLine();
+					updateFlag = manager.deleteRecord(this.getDataFile() + IMSConstants.TXT, choice, sc);
 					System.out.println("Do you want to remove more Y/N?");
-					submenuContd = brReader.readLine();
+					submenuContd = sc.nextLine();
 					break;
 
 				case "4.3":
-					updateFlag = manager.modifyRecord(this.getDataFile() + IMSConstants.TXT, brReader);
+					updateFlag = manager.modifyRecord(this.getDataFile() + IMSConstants.TXT, sc);
 					System.out.println("Do you want to update more records Y/N?");
-					submenuContd = brReader.readLine();
+					submenuContd = sc.nextLine();
 					break;
 
 				case "4.4":
 					submenuContd = "N";
-					mainMenuContd = "N";
-					if (!updateFlag) {
+//					if (updateFlag) {
 						manager.createBackup(buffer);
 						System.out.println(
-								"\n File backup with the name backup.txt created at the same location of original file.");
-						System.out.println("\n\n Exiting from the menu.........");
-					}
+								"\n 	File backup with the name backup.txt created at the same location of original file.");
+						System.out.println("\n\n	Exiting from the menu.........");
+						mainMenuContd = "N"; 
+					/*
+					  } else { System.out.println("\n	Exiting from the menu.........");
+					  mainMenuContd = "N"; }
+					 */
 					break;
 
 				default:
@@ -141,22 +147,77 @@ public class IMSImplementation {
 
 			}
 			if (mainMenuContd.equalsIgnoreCase("Y")) {
-				System.out.println("Do you want to continue in menu 4 or return to main menu? Continue -  Y, Return - N");
-				mainMenuContd = brReader.readLine();
+				System.out.println("Do you want to continue here or return to main menu Y/N?");
+				mainMenuContd = sc.nextLine();
 			}
 		}
-		if (updateFlag) {			
+		if (updateFlag) {
 			manager.createBackup(buffer);
-			clearscr();
 			System.out.println(
 					"\n 	File backup with the name backup.txt created at the same location of original file.");
-			System.out.println("\n\n	Returning to main menu.........");
-			try{
-				Thread.sleep(3000);
-			} catch(InterruptedException e) {}
-			clearscr();			
+			System.out.println("\n\n	Exiting from the menu.........");
+			mainMenuContd = "N"; 			
 		}
+		sc.close();
 	}
+	
+	public void showInventoryMenu() throws FileNotFoundException, IOException
+	{
+		//Function for displaying options for Menu 3 - search the inventory
+		Scanner sc = new Scanner(System.in);
+		IMSManagerMenu3 manager = new IMSManagerMenu3();
+		String choice="";
+		String userInput=" ";
+		int columnNumber=10;
+		//Switch statement for getting inputs from user and calling showInventoryResults function based on the parameters
+		while(choice!="3.6")
+		{
+			System.out.println("\nShow Inventory Menu - Menu 3");
+			System.out.println("\n3.1 Show entire inventory \n3.2 Show inventory by Manufacturer \n"
+				+ "3.3 Show inventory by Type \n3.4 Show inventory by Location \n3.5 Show current discount items"
+				+ "\n3.6 Main Menu");
+		
+			choice = sc.nextLine();
+			switch(choice)
+			{
+			case "3.1":
+				manager.showInventory(this.getDataFile() + IMSConstants.TXT);
+				break;
+				
+			case "3.2":
+				System.out.println("Enter Manufacturer name\n");
+				userInput=sc.nextLine();
+				columnNumber=3;
+				manager.showInventoryResults(this.getDataFile() + IMSConstants.TXT, userInput,columnNumber);
+				break;
+				
+			case "3.3":
+				System.out.println("Enter Type\n");
+				userInput=sc.nextLine();
+				columnNumber=4;
+				manager.showInventoryResults(this.getDataFile() + IMSConstants.TXT, userInput,columnNumber);
+				break;
+				
+			case "3.4":
+				System.out.println("Enter Location\n");
+				userInput=sc.nextLine();
+				columnNumber=5;
+				manager.showInventoryResults(this.getDataFile() + IMSConstants.TXT, userInput,columnNumber);
+				break;
+				
+			case "3.5":
+				columnNumber=8;
+				manager.showInventoryResults(this.getDataFile() + IMSConstants.TXT, userInput,columnNumber);
+				break;
+				
+			case "3.6":
+				startPoint();
+				break;
+			}
+		}
+		sc.close();
+	}
+	
 
 	public static void clearscr() {
 		for (int i = 0; i < 50; ++i)
