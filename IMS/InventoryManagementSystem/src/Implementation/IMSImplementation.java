@@ -1,6 +1,7 @@
 package Implementation;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -38,7 +39,7 @@ public class IMSImplementation {
 		this.readInputFromUser();
 	}
 
-	public void readInputFromUser() throws IOException {
+	public void readInputFromUser() throws IOException, FileNotFoundException {
 		if (this.getSelectedInput() != null) {
 			if (this.getSelectedInput().equalsIgnoreCase(IMSConstants.ONE)) {
 				manager.readDataFile(this);
@@ -47,8 +48,7 @@ public class IMSImplementation {
 			} else if (this.getSelectedInput().equalsIgnoreCase(IMSConstants.THREE)) {
 
 			} else if (this.getSelectedInput().equalsIgnoreCase(IMSConstants.FOUR)) {
-				addRecordmenu();
-//				firstTime = false;
+				addRecordmenu();				
 				IMSManager.redirect(this);
 			} else if (this.getSelectedInput().equalsIgnoreCase(IMSConstants.FIVE)) {
 
@@ -80,8 +80,8 @@ public class IMSImplementation {
 		}
 	}
 
-	private void addRecordmenu() throws IOException {
-		
+	private void addRecordmenu() throws IOException, FileNotFoundException {
+
 		brReader = new BufferedReader(new InputStreamReader(System.in));
 		IMSManager manager = new IMSManager();
 		boolean updateFlag = false;
@@ -124,12 +124,12 @@ public class IMSImplementation {
 
 				case "4.4":
 					submenuContd = "N";
-					mainMenuContd = "N"; 
+					mainMenuContd = "N";
 					if (!updateFlag) {
 						manager.createBackup(buffer);
 						System.out.println(
-								"\n 	File backup with the name backup.txt created at the same location of original file.");
-						System.out.println("\n\n	Exiting from the menu.........");
+								"\n File backup with the name backup.txt created at the same location of original file.");
+						System.out.println("\n\n Exiting from the menu.........");
 					}
 					break;
 
@@ -141,17 +141,21 @@ public class IMSImplementation {
 
 			}
 			if (mainMenuContd.equalsIgnoreCase("Y")) {
-				System.out.println("Do you want to continue here or return to main menu Y/N?");
+				System.out.println("Do you want to continue in menu 4 or return to main menu? Continue -  Y, Return - N");
 				mainMenuContd = brReader.readLine();
 			}
 		}
-		if (updateFlag) {
+		if (updateFlag) {			
 			manager.createBackup(buffer);
+			clearscr();
 			System.out.println(
 					"\n 	File backup with the name backup.txt created at the same location of original file.");
-			System.out.println("\n\n	Exiting from the menu.........");
-			mainMenuContd = "N"; 			
-		}		
+			System.out.println("\n\n	Returning to main menu.........");
+			try{
+				Thread.sleep(3000);
+			} catch(InterruptedException e) {}
+			clearscr();			
+		}
 	}
 
 	public static void clearscr() {
