@@ -155,7 +155,7 @@ public class IMSImplementation {
 			System.out.println("\n\n	Exiting from the menu.........");
 			mainMenuContd = "N"; 			
 		}
-		sc.close();
+		//sc.close();
 	}
 
 	public static void clearscr() {

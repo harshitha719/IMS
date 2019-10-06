@@ -147,7 +147,7 @@ public class IMSManager {
 
 		try {
 			File file = displayInventory(filename);
-			System.out.println("\n\n\n\n");
+			System.out.println("\n\n");
 			
 			System.out.println("\n Enter the record values to add separated by tab in the format : " + "\n"
 					+ "ProductID   Product  Model Manufacturer  typeCode  LocationCode	MSRP	UNITCOST	DISCOUNTRATE	QTY");
@@ -171,7 +171,7 @@ public class IMSManager {
 
 		try {
 			File file = displayInventory(filename);
-			System.out.println("\n\n\n\n");
+			System.out.println("\n\n");
 						
 			String record;
 			if (choice.equalsIgnoreCase("ID")) {
@@ -246,7 +246,7 @@ public class IMSManager {
 		
 		try {
 			File file = displayInventory(filename);
-			System.out.println("\n\n\n\n");
+			System.out.println("\n\n");
 						
 			System.out.println("\n Enter the ProductID to make updates");
 			String record = sc.nextLine();
