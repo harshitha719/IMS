@@ -1,9 +1,13 @@
 package Constant;
-
+/**
+ * 
+ * IMSConstants
+ *
+ */
 public final class IMSConstants {
 	private IMSConstants() {
         // restricting instantiation
-}
+	}
 public static final String  HARDWARE = "Hardware";
 public static final String  STATIONARY = "STATIONARY";
 public static final String  ONE = "1";
@@ -23,5 +27,12 @@ public static final String ERRORPRODUCTNOTPRESENT ="productID or Product not pre
 public static final String ENTERDATAFILE ="Enter Data File Name";
 public static final String TXT =".txt";
 public static final String ERRORINVALIDFILE = "Invalid Data File \n";
-
+public static final String NOITERATE = "noiterate";
+public static final String ITERATE = "iterate";
+public static final String PRODUCT = "Product";
+public static final String PRODUCTID = "ProductID";
+public static final String SELECTZEROORSIX = "Please select 0 or 6";
+public static final String ENTERATTRIBUTESTOSEARCH ="Enter attributes to search";
+public static final String THANKYOU ="Thank you for using Inventory Management System";
+public static final String MAINMENU = "IMS Main Menu";
 }
