@@ -32,7 +32,8 @@ public static final String ITERATE = "iterate";
 public static final String PRODUCT = "Product";
 public static final String PRODUCTID = "ProductID";
 public static final String SELECTZEROORSIX = "Please select 0 or 6";
-public static final String ENTERATTRIBUTESTOSEARCH ="Enter attributes to search";
+public static final String ENTERATTRIBUTESTOSEARCH ="Enter keyword to search";
 public static final String THANKYOU ="Thank you for using Inventory Management System";
 public static final String MAINMENU = "IMS Main Menu";
+public static final String NOKEYWORDMATCHFOUND ="No Keyword match found \n";
 }
