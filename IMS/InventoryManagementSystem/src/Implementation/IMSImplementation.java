@@ -263,6 +263,7 @@ public void showInventoryMenu() throws FileNotFoundException, IOException
 			
 		case "3.6":
 			startPoint();
+			choice="3.6";
 			break;
 		}
 	}
