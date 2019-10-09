@@ -3,6 +3,7 @@ package Manager;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -96,7 +97,6 @@ public class IMSManagerMenu1And2 {
 		
 		if(productExist==Boolean.FALSE)
 			System.out.println(IMSConstants.ERRORPRODUCTNOTPRESENT);
-			redirect(imsImplementation);
 		}
 	
 	/**
@@ -106,6 +106,7 @@ public class IMSManagerMenu1And2 {
 	 * @throws IOException
 	 */
 	public void searchByOtherAttribute(IMSImplementation imsImplementation) throws IOException {
+		boolean productExist = Boolean.FALSE;
 		imsImplementation.brReader = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println(IMSConstants.ENTERATTRIBUTESTOSEARCH);
 		Boolean listClear = Boolean.TRUE;
@@ -121,11 +122,13 @@ public class IMSManagerMenu1And2 {
 				String data = (String) it.next();
 				data = data.toLowerCase();
 				if(data.contains(otherAttribute.toLowerCase())) {
+					productExist = Boolean.TRUE;
 					System.out.println(data);
 				}
 			}
 		}
-		redirect(imsImplementation);
+		if(productExist==Boolean.FALSE)
+			System.out.println(IMSConstants.NOKEYWORDMATCHFOUND);
 	}
 	/**
 	 * clearConsole
@@ -160,9 +163,9 @@ public class IMSManagerMenu1And2 {
 	 * defaultDataFileRead
 	 * This method reads the default data file.
 	 * @param imsImplementation
-	 * @throws FileNotFoundException
+	 * @throws IOException 
 	 */
-	public void defaultDataFileRead(IMSImplementation imsImplementation) throws FileNotFoundException {
+	public void defaultDataFileRead(IMSImplementation imsImplementation) throws IOException {
 		  
 		   if(!imsImplementation.fileNameList.contains(imsImplementation.getDataFile())) {
 			Boolean listClear = Boolean.FALSE;
@@ -185,32 +188,26 @@ public class IMSManagerMenu1And2 {
 	 * @param imsImplementation
 	 * @param listClear
 	 * @param trigger
-	 * @throws FileNotFoundException
+	 * @throws FileNotFoundException,IOException 
 	 */
-	private void fileReadToList(IMSImplementation imsImplementation,Boolean listClear,String trigger) throws FileNotFoundException {
-		Scanner scanInput1 = new Scanner(new File(imsImplementation.getDataFile() + IMSConstants.TXT));
-		String row = "";
-		String value = "";
+	private void fileReadToList(IMSImplementation imsImplementation,Boolean listClear,String trigger) throws FileNotFoundException,IOException {
+		String str;
+		File file = new File(imsImplementation.getDataFile() + IMSConstants.TXT);
+		BufferedReader br = new BufferedReader(new FileReader(file));
 		if(listClear) {
 			imsImplementation.dataFileList = new ArrayList<String>();
 		}
 		if(trigger.equalsIgnoreCase(IMSConstants.NOITERATE)) {
 			imsImplementation.searchList = new ArrayList<String>();
 		}
-		
-		while (scanInput1.hasNext()) {
-			imsImplementation.count++;
-			value = scanInput1.next();
-			row = row + value.concat(" ");
-			if (imsImplementation.count % 10 == 0) {
-				if(trigger.equalsIgnoreCase(IMSConstants.ITERATE)) {
-				imsImplementation.dataFileList.add(row);
+		while ((str = br.readLine()) != null) {
+			if(trigger.equalsIgnoreCase(IMSConstants.ITERATE)) {
+				imsImplementation.dataFileList.add(str);
 				} else {
-					imsImplementation.searchList.add(row);
+					imsImplementation.searchList.add(str);
 				}
-				row = "";
-		}
-		}
+			
+	}
 	}
 	/**
 	 * populateMapWithProductAndID
@@ -224,7 +221,7 @@ public class IMSManagerMenu1And2 {
 		 imsImplementation.productIDMap = new HashMap<String,ArrayList<String>>();
 		ArrayList<String> listValues = null;
 		for (String list:ProductList) {
-			String[] words=list.split(" ");
+			String[] words=list.split("\t");
 				if(words[1] != IMSConstants.PRODUCT && imsImplementation.productMap.containsKey(words[1])) {
 					imsImplementation.productMap.get(words[1]).add(list);
 				} else {
