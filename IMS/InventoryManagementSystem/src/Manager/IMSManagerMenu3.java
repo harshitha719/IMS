@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 public class IMSManagerMenu3 {
@@ -22,7 +23,9 @@ public class IMSManagerMenu3 {
 			a1.add(str);
 		
 		//sort the data in the array list
-        a1.sort(null);
+        Collections.sort(a1);
+		//a1.sort(null);
+        
         //display the data in array list
         System.out.println(a1.get(a1.size()-1));
         for (int i=0; i<a1.size()-1; i++) 
@@ -65,7 +68,8 @@ public class IMSManagerMenu3 {
 			}
 
 		}
-        a1.sort(null);
+        Collections.sort(a1);
+        //a1.sort(null);
         //display the filtered data from the file
         if(recordFound)
         {
