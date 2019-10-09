@@ -170,7 +170,7 @@ private void addRecordmenu() throws IOException, FileNotFoundException {
 }
 
 public static void clearscr() {
-	for (int i = 0; i < 50; ++i)
+	for (int i = 0; i < 20; ++i)
 		System.out.println();
 }
 /**
@@ -179,29 +179,31 @@ public static void clearscr() {
  * @throws IOException
  */
 private void searchProduct() throws IOException {
-	String searchMenu ;
-	String searchProduct;
+	String searchMenu ="";
+	brReader = new BufferedReader(new InputStreamReader(System.in));
+	while(searchMenu!="2.3")
+	{
 	System.out.println("Menu 2 \n" 
 						+ " "
-						+ "1. Search Product \n"
+						+ "2.1 Search Product \n"
 						+ " "
-						+"2. Search Product by other attribute \n"
+						+"2.2 Search Product by other attribute \n"
 						+ " "
-						+"3. Main Menu \n");
-	brReader = new BufferedReader(new InputStreamReader(System.in));
+						+"2.3 Main Menu \n");
+	
 	searchMenu=brReader.readLine();
-	if(searchMenu!=null && searchMenu.equalsIgnoreCase(IMSConstants.TWODOTONE)) {
+	switch(searchMenu)
+	{
+	case "2.1":
 		manager.searchByproductAndID(this);
-	}
-	else if(searchMenu!=null && searchMenu.equalsIgnoreCase(IMSConstants.TWODOTTWO)) {
+		break;
+	case "2.2":
 		manager.searchByOtherAttribute(this);
+		break;
+	case "2.3":
+		startPoint();
+		break;
 	}
-	else if(searchMenu!=null && searchMenu.equalsIgnoreCase(IMSConstants.TWODOTTHREE)) {
-	startPoint();
-	}
-	else {
-		System.out.println(IMSConstants.ERRORINVALIDMENU2);
-		searchProduct();
 	}
 }
 /**
