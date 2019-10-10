@@ -1,21 +1,24 @@
 package Implementation;
 import java.io.BufferedReader;
-import java.util.Scanner;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Scanner;
+
 import Constant.IMSConstants;
 import Manager.IMSManagerMenu1And2;
-import Manager.IMSManagerMenu4;
-import java.io.FileNotFoundException;
 import Manager.IMSManagerMenu3;
+import Manager.IMSManagerMenu4;
+import Manager.IMSManagerMenu5;
 /**
  * IMSImplementation
  */
 public class IMSImplementation {
 public IMSManagerMenu1And2 manager;
 public IMSManagerMenu4 menu4manager;
+public IMSManagerMenu5 menu5manager;
 public String selectedInput;
 public String dataFile;
 public BufferedReader brReader = null;
@@ -34,8 +37,10 @@ public ArrayList<String>searchList = null;
  * @throws IOException
  */
 public void startPoint() throws IOException {
+	//Initiating the manager on class load
 	manager = new IMSManagerMenu1And2();
 	menu4manager = new IMSManagerMenu4();
+	menu5manager= new IMSManagerMenu5();
 	System.out.println(IMSConstants.MAINMENU);
 	System.out.println("1. Input Data \n" +
 			"2. Search Inventory \n" +
@@ -43,14 +48,15 @@ public void startPoint() throws IOException {
 			"4. Change record \n" +
 			"5. Mail \n" +
 			"6. Exit");
+	//application loading first time need to load default file
 	if(firstTime) {
 		this.setDataFile(IMSConstants.HARDWARE);
 		manager.defaultDataFileRead(this);
 	}
+	//read input from user  
 	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	System.out.println(IMSConstants.ENTERMAINMENU);
 	this.setSelectedInput(br.readLine());
-	
 	this.readInputFromUser();
 }
 /**
@@ -61,26 +67,33 @@ public void startPoint() throws IOException {
 public void readInputFromUser() throws IOException{
 	if(this.getSelectedInput()!=null) {
 		if (this.getSelectedInput().equalsIgnoreCase(IMSConstants.ONE)) {
+			//function call of menu 1
 			manager.readDataFile(this);
 		}
 		else if(this.getSelectedInput().equalsIgnoreCase(IMSConstants.TWO)) {
+			//function call of menu 2
 			searchProduct();
 		}
 		else if(this.getSelectedInput().equalsIgnoreCase(IMSConstants.THREE)) {
+			//function call of menu 3
 			showInventoryMenu();
 		}
 		else if(this.getSelectedInput().equalsIgnoreCase(IMSConstants.FOUR)) {
+			//function call of menu 4
 			addRecordmenu();
 			clearscr();
 			IMSManagerMenu1And2.redirect(this);
 		}
 		else if(this.getSelectedInput().equalsIgnoreCase(IMSConstants.FIVE)) {
-			
+			//function call of menu 5
+			menu5manager.triggerMail();
 		}
 		else if(this.getSelectedInput().equalsIgnoreCase(IMSConstants.SIX)) {
+			//function call of menu 6
 			IMSManagerMenu1And2.clearConsole();
 		}
 		else {
+			//invalid entry
 			System.out.println("Please select valid number from Menu \n");
 			startPoint();
 		}
