@@ -11,7 +11,7 @@ import java.io.PrintWriter;
 import Constant.IMSConstants;
 import Implementation.IMSImplementation;
 public class IMSManagerMenu4 {
-	private static File backupFile;
+	private static File backupFile;	
 
 	public boolean addRecord(String filename, BufferedReader brReader) throws FileNotFoundException, IOException {
 
@@ -30,9 +30,10 @@ public class IMSManagerMenu4 {
 		while ((strg = brd.readLine()) != null) {
 			lastRec = strg;
 		}
-		String[] token = lastRec.split("\t");
-		Integer productId = Integer.parseInt(token[0]) + 1;
-		record = productId.toString() + "\t" + record;
+		String[] token = lastRec.split(IMSConstants.recordDelimiter);
+		String id = token[0].substring(1);
+		Integer productId = Integer.parseInt(id) + 1;
+		record = "a" + productId.toString() + IMSConstants.recordDelimiter + record;
 		BufferedWriter bw = new BufferedWriter(new FileWriter(file, true));
 		bw.newLine();
 		bw.write(record);
@@ -73,7 +74,7 @@ public class IMSManagerMenu4 {
 		StringBuffer buff = new StringBuffer("");
 		boolean recordFound = false;
 		while ((strg = brd.readLine()) != null) {
-			String[] token = strg.split("\t");
+			String[] token = strg.split(IMSConstants.recordDelimiter);
 			if (token != null && token.length != 0) {
 				if (choice.equalsIgnoreCase("ID"))
 					matchrec = token[0];
@@ -139,7 +140,7 @@ public class IMSManagerMenu4 {
 		boolean recordFound = false;
 		StringBuffer buff = new StringBuffer("");
 		while ((strg = brd.readLine()) != null) {
-			String[] token = strg.split("\t");
+			String[] token = strg.split(IMSConstants.recordDelimiter);
 
 			if (token != null && token.length != 0) {
 				if (!token[0].equals(record)) {
@@ -155,14 +156,14 @@ public class IMSManagerMenu4 {
 		brd.close();
 
 		if (recordFound) {
-			String[] recordToken = matchrec.split("\t");
+			String[] recordToken = matchrec.split(IMSConstants.recordDelimiter);
 			switch (column) {
 			case "7":
 				for (int i = 0; i < recordToken.length; i++) {
 					if (i == 7)
-						buff.append(value).append("\t");
+						buff.append(value).append(IMSConstants.recordDelimiter);
 					else
-						buff.append(recordToken[i]).append("\t");
+						buff.append(recordToken[i]).append(IMSConstants.recordDelimiter);
 				}
 				buff.append("\n");
 				break;
@@ -174,11 +175,11 @@ public class IMSManagerMenu4 {
 						Integer unitCost;
 						Integer discount = Integer.parseInt(value);
 						unitCost = msrp - ((discount * msrp) / 100);
-						buff.append(unitCost.toString()).append("\t");
+						buff.append(unitCost.toString()).append(IMSConstants.recordDelimiter);
 					} else if (i == 9)
-						buff.append(value).append("\t");
+						buff.append(value).append(IMSConstants.recordDelimiter);
 					else
-						buff.append(recordToken[i]).append("\t");
+						buff.append(recordToken[i]).append(IMSConstants.recordDelimiter);
 				}
 				buff.append("\n");
 
@@ -187,9 +188,9 @@ public class IMSManagerMenu4 {
 			case "10":
 				for (int i = 0; i < recordToken.length; i++) {
 					if (i == 7)
-						buff.append(value).append("\t");
+						buff.append(value).append(IMSConstants.recordDelimiter);
 					else
-						buff.append(recordToken[i]).append("\t");
+						buff.append(recordToken[i]).append(IMSConstants.recordDelimiter);
 				}
 				buff.append("\n");
 

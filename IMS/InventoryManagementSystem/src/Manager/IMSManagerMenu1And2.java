@@ -221,7 +221,7 @@ public class IMSManagerMenu1And2 {
 		 imsImplementation.productIDMap = new HashMap<String,ArrayList<String>>();
 		ArrayList<String> listValues = null;
 		for (String list:ProductList) {
-			String[] words=list.split("\t");
+			String[] words=list.split(IMSConstants.recordDelimiter);
 				if(words[1] != IMSConstants.PRODUCT && imsImplementation.productMap.containsKey(words[1])) {
 					imsImplementation.productMap.get(words[1]).add(list);
 				} else {

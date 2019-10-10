@@ -78,7 +78,7 @@ public void readInputFromUser() throws IOException{
 			
 		}
 		else if(this.getSelectedInput().equalsIgnoreCase(IMSConstants.SIX)) {
-			manager.clearConsole();
+			IMSManagerMenu1And2.clearConsole();
 		}
 		else {
 			System.out.println("Please select valid number from Menu \n");
