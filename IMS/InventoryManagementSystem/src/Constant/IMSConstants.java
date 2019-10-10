@@ -36,5 +36,10 @@ public static final String ENTERATTRIBUTESTOSEARCH ="Enter keyword to search";
 public static final String THANKYOU ="Thank you for using Inventory Management System";
 public static final String MAINMENU = "IMS Main Menu";
 public static final String NOKEYWORDMATCHFOUND ="No Keyword match found \n";
-public static final String DATAFILEREADSUCCESS = "Data File read successfully \n";
+public static final String recordDelimiter = "\t\t";
+public static final String USERNAME = "enterpriseIMSsolutions@gmail.com";
+public static final String PASSWORD = "inventory";
+public static final String MESSAGE = "PFA of the inventory stock";
+public static final String MAILSUCCESS ="Email Send Successfully to";
+public static final String ENTEREMAIL ="Enter the email address to send Inventory details";
 }
