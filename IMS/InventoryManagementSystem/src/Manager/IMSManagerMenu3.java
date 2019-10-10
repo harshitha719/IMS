@@ -45,7 +45,7 @@ public class IMSManagerMenu3 {
 	        
 	    //traverse the file, split each row based on tab delimiter and store the data in array list based on the search criteria
 		while ((strg = brd.readLine()) != null) {
-			String[] token = strg.split("\t");
+			String[] token = strg.split("\t\t");
 
 			if (token != null && token.length != 0 && !token[0].equals("ProductID")) {
 				if (columnNumber==8) //check if we have to show discounted items
