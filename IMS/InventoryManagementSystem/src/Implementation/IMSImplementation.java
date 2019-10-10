@@ -212,40 +212,49 @@ private void searchProduct() throws IOException {
  * @throws FileNotFoundException
  * @throws IOException
  */
+
 public void showInventoryMenu() throws FileNotFoundException, IOException
 {
 	//Function for displaying options for Menu 3 - search the inventory
+	//Scanner to get user input
 	Scanner sc = new Scanner(System.in);
+	//Created an object of IMSManagerMenu3 class
 	IMSManagerMenu3 manager = new IMSManagerMenu3();
 	String choice="";
 	String userInput=" ";
 	int columnNumber=10;
-	//Switch statement for getting inputs from user and calling showInventoryResults function based on the parameters
+	//while loop to show Menu 3 until user inputs 3.6 to go back to the main Menu
 	while(choice!="3.6")
 	{
+		//print the Menu 3 options to the user
 		System.out.println("\nShow Inventory Menu - Menu 3");
 		System.out.println("\n3.1 Show entire inventory \n3.2 Show inventory by Manufacturer \n"
 			+ "3.3 Show inventory by Type \n3.4 Show inventory by Location \n3.5 Show current discount items"
 			+ "\n3.6 Main Menu");
 	
+		//get user input
 		choice = sc.nextLine();
+		//Switch statement for getting inputs from user and calling showInventoryResult class functions based on the user inputs
 		switch(choice)
 		{
 		case "3.1":
+			//function call to show entire inventory, passing the file name as input
 			manager.showInventory(this.getDataFile() + IMSConstants.TXT);
-			break;
-			
+			break;	
+	
 		case "3.2":
 			System.out.println("Enter Manufacturer name\n");
+			//get the manufacturer name from the user
 			userInput=sc.nextLine();
 			columnNumber=3;
+			//function call to show data for the manufacturer entered by the user, passing file name, manufacturer name and column number
 			manager.showInventoryResults(this.getDataFile() + IMSConstants.TXT, userInput,columnNumber);
-			break;
-			
+			break;	
 		case "3.3":
 			System.out.println("Enter Type\n");
 			userInput=sc.nextLine();
 			columnNumber=4;
+			//function call to show the data for Type entered by the user
 			manager.showInventoryResults(this.getDataFile() + IMSConstants.TXT, userInput,columnNumber);
 			break;
 			
@@ -253,15 +262,18 @@ public void showInventoryMenu() throws FileNotFoundException, IOException
 			System.out.println("Enter Location\n");
 			userInput=sc.nextLine();
 			columnNumber=5;
+			//function call to show the data for location entered by the user
 			manager.showInventoryResults(this.getDataFile() + IMSConstants.TXT, userInput,columnNumber);
 			break;
 			
 		case "3.5":
 			columnNumber=8;
+			//function call to show the data for all lines with non-zero discounts
 			manager.showInventoryResults(this.getDataFile() + IMSConstants.TXT, userInput,columnNumber);
 			break;
 			
 		case "3.6":
+			//function call to go back to the main menu
 			startPoint();
 			choice="3.6";
 			break;
