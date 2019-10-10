@@ -21,7 +21,7 @@ public class IMSManagerMenu4 {
 		File file = displayInventory(filename);
 		System.out.println("\n\n");
 
-		System.out.println("\n Enter the record values to add separated by tab in the format : " + "\n"
+		System.out.println("\n Enter the record values to add separated by double tab in the format : " + "\n"
 				+ "Product  Model	Manufacturer  typeCode  LocationCode	MSRP	UNITCOST	DISCOUNTRATE	QTY");
 		String record = brReader.readLine();
 		BufferedReader brd = new BufferedReader(new FileReader(file));
@@ -33,7 +33,12 @@ public class IMSManagerMenu4 {
 		String[] token = lastRec.split(IMSConstants.recordDelimiter);
 		String id = token[0].substring(1);
 		Integer productId = Integer.parseInt(id) + 1;
-		record = "a" + productId.toString() + IMSConstants.recordDelimiter + record;
+		id = productId.toString();
+		int idlen = id.length();
+		for (int i=0; i< 9-idlen; i++) {
+			id = 0 + id;
+		}
+		record = "a" + id + IMSConstants.recordDelimiter + record;
 		BufferedWriter bw = new BufferedWriter(new FileWriter(file, true));
 		bw.newLine();
 		bw.write(record);
@@ -160,8 +165,15 @@ public class IMSManagerMenu4 {
 			switch (column) {
 			case "7":
 				for (int i = 0; i < recordToken.length; i++) {
-					if (i == 7)
+					if (i == 6)
 						buff.append(value).append(IMSConstants.recordDelimiter);
+					else if (i==7) {
+						Integer msrp = Integer.parseInt(value);
+						Integer unitCost;
+						Integer discount = Integer.parseInt(recordToken[8]);
+						unitCost = msrp - ((discount * msrp) / 100);
+						buff.append(unitCost.toString()).append(IMSConstants.recordDelimiter);
+					}
 					else
 						buff.append(recordToken[i]).append(IMSConstants.recordDelimiter);
 				}
@@ -170,13 +182,13 @@ public class IMSManagerMenu4 {
 
 			case "9":
 				for (int i = 0; i < recordToken.length; i++) {
-					if (i == 8) {
+					if (i == 7) {
 						Integer msrp = Integer.parseInt(recordToken[6]);
 						Integer unitCost;
 						Integer discount = Integer.parseInt(value);
 						unitCost = msrp - ((discount * msrp) / 100);
 						buff.append(unitCost.toString()).append(IMSConstants.recordDelimiter);
-					} else if (i == 9)
+					} else if (i == 8)
 						buff.append(value).append(IMSConstants.recordDelimiter);
 					else
 						buff.append(recordToken[i]).append(IMSConstants.recordDelimiter);
@@ -192,7 +204,7 @@ public class IMSManagerMenu4 {
 					else
 						buff.append(recordToken[i]).append(IMSConstants.recordDelimiter);
 				}
-				buff.append("\n");
+				//buff.append("\n");
 
 				break;
 			default:
