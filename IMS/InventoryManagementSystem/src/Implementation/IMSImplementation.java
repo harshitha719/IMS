@@ -3,6 +3,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.ProcessBuilder.Redirect;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
@@ -87,6 +88,7 @@ public void readInputFromUser() throws IOException{
 		else if(this.getSelectedInput().equalsIgnoreCase(IMSConstants.FIVE)) {
 			//function call of menu 5
 			menu5manager.triggerMail();
+			IMSManagerMenu1And2.redirect(this);
 		}
 		else if(this.getSelectedInput().equalsIgnoreCase(IMSConstants.SIX)) {
 			//function call of menu 6
