@@ -8,6 +8,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 
 import Constant.IMSConstants;
 import Implementation.IMSImplementation;
@@ -125,9 +128,9 @@ public class IMSManagerMenu4 {
 		BufferedReader brd = new BufferedReader(new FileReader(file));
 		String strg;
 		String matchrec;
-		StringBuffer buff = new StringBuffer("");
+		StringBuffer buff = new StringBuffer();
 		boolean recordFound = false;
-
+		HashMap<String, String> map = new HashMap<String, String>();
 		// read every record from file and split to fetch
 		// ProductId/Name/Model/Manufacturer. Match this with the requested delete by
 		// value provided y the user.
@@ -143,7 +146,7 @@ public class IMSManagerMenu4 {
 				else
 					matchrec = token[3];
 
-				if (!matchrec.equals(record)) {
+				if (!matchrec.equals(record)) {					
 					buff.append(strg).append("\n");
 				} else
 					recordFound = true;
@@ -204,7 +207,7 @@ public class IMSManagerMenu4 {
 		String strg;
 		String matchrec = "";
 		boolean recordFound = false;
-		StringBuffer buff = new StringBuffer("");
+		StringBuffer buff = new StringBuffer();
 
 		// read every record from file and match against the value. Match this with the
 		// requested update value of MSRP, Discount or Quantity provided by the user.
@@ -286,7 +289,8 @@ public class IMSManagerMenu4 {
 			default:
 				break;
 			}
-			// empty the contents of file to write only the records not deleted by
+			StringBuffer strBuf = sortFileData(buff);
+	        // empty the contents of file to write only the records not deleted by
 			// the user
 			FileWriter fw = new FileWriter(file);
 			PrintWriter pw = new PrintWriter(fw);
@@ -295,7 +299,7 @@ public class IMSManagerMenu4 {
 			pw.close();
 			// write the updated and non updated records to same file
 			BufferedWriter bw = new BufferedWriter(new FileWriter(file, true));
-			bw.write(buff.toString());
+			bw.write(strBuf.toString());
 			bw.close();
 			System.out.println("\n	Requested record successfully modified.");
 			updateFlag = true;
@@ -305,6 +309,28 @@ public class IMSManagerMenu4 {
 		}
 
 		return updateFlag;
+	}
+
+	/**
+	 * @param buff
+	 * @return
+	 */
+	private StringBuffer sortFileData(StringBuffer buff) {
+		Map<String, String> map = new HashMap<String, String>();
+		String [] rowToken = buff.toString().split("\n");
+		for (String row: rowToken){
+			String[] colToken = row.split(IMSConstants.recordDelimiter);
+			map.put(colToken[0], row);
+		}
+		// TreeMap to store sorted values of HashMap 
+		TreeMap<String, String> sorted = new TreeMap<>(); 
+		sorted.putAll(map); 
+
+		StringBuffer strBuf = new StringBuffer();
+		for (Map.Entry<String, String> entry : sorted.entrySet()) {
+			strBuf = strBuf.append(entry.getValue()).append("\n");
+		}
+		return strBuf;
 	}
 
 	/**
