@@ -235,9 +235,9 @@ public class IMSManagerMenu4 {
 
 					// update to Unit Price based on MSRP update
 					else if (i == 7) {
-						Integer msrp = Integer.parseInt(value);
-						Integer unitCost;
-						Integer discount = Integer.parseInt(recordToken[8]);
+						Double msrp = Double.valueOf(value);
+						Double unitCost;
+						Double discount = Double.valueOf(recordToken[8]);
 						unitCost = msrp - ((discount * msrp) / 100);
 						buff.append(unitCost.toString()).append(IMSConstants.recordDelimiter);
 
@@ -253,9 +253,9 @@ public class IMSManagerMenu4 {
 
 					// update Unit Price based on updated discount rate
 					if (i == 7) {
-						Integer msrp = Integer.parseInt(recordToken[6]);
-						Integer unitCost;
-						Integer discount = Integer.parseInt(value);
+						Double msrp = Double.valueOf(recordToken[6]);
+						Double unitCost;
+						Double discount = Double.valueOf(value);
 						unitCost = msrp - ((discount * msrp) / 100);
 						buff.append(unitCost.toString()).append(IMSConstants.recordDelimiter);
 					}
