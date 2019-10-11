@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.lang.ProcessBuilder.Redirect;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
@@ -226,6 +225,7 @@ public class IMSImplementation {
 				break;
 			case "2.3":
 				startPoint();
+				searchMenu = "2.3";
 				break;
 			}
 		}
