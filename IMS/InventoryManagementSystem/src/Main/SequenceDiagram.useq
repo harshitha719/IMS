@@ -4,7 +4,7 @@
     file="/InventoryManagementSystem/src/Main/Main.java" binary="false" label="main" type="class" autoSize="true">    
     <position height="-1" width="-1" x="143" y="0"/>    
     <execution id="2">      
-      <position height="1430" width="57" x="5" y="113"/>    
+      <position height="1290" width="57" x="5" y="113"/>    
     </execution>  
   </object>  
   <object id="5" language="java" name="Implementation.IMSImplementation" project="InventoryManagementSystem" 
@@ -12,28 +12,25 @@
     type="class" autoSize="true">    
     <position height="-1" width="-1" x="209" y="0"/>    
     <execution id="4">      
-      <position height="1382" width="158" x="66" y="137"/>    
-    </execution>    
-    <execution id="16">      
-      <position height="24" width="0" x="0" y="2657"/>    
+      <position height="1242" width="158" x="66" y="137"/>    
     </execution>    
     <execution id="15">      
-      <position height="1094" width="7" x="142" y="401"/>    
+      <position height="954" width="7" x="142" y="401"/>    
     </execution>    
-    <execution id="20">      
+    <execution id="19">      
       <position height="218" width="7" x="142" y="614"/>    
     </execution>    
-    <execution id="22">      
-      <position height="266" width="7" x="142" y="889"/>    
+    <execution id="21">      
+      <position height="123" width="7" x="142" y="889"/>    
     </execution>    
-    <execution id="24">      
-      <position height="229" width="7" x="142" y="1242"/>    
+    <execution id="23">      
+      <position height="229" width="7" x="142" y="1072"/>    
     </execution>    
-    <execution id="30">      
+    <execution id="31">      
       <position height="24" width="7" x="148" y="784"/>    
     </execution>  
   </object>  
-  <object id="51" language="java" name="Manager.IMSManagerMenu1And2" project="InventoryManagementSystem" 
+  <object id="44" language="java" name="Manager.IMSManagerMenu1And2" project="InventoryManagementSystem" 
     file="/InventoryManagementSystem/src/Manager/IMSManagerMenu1And2.java" binary="false" label="manager" type="class" 
     autoSize="true">    
     <position height="0" width="0" x="0" y="0"/>    
@@ -43,63 +40,59 @@
     <execution id="13">      
       <position height="24" width="0" x="0" y="328"/>    
     </execution>    
-    <execution id="18">      
+    <execution id="17">      
       <position height="96" width="195" x="228" y="432"/>    
     </execution>    
-    <execution id="53">      
+    <execution id="46">      
       <position height="24" width="7" x="322" y="480"/>    
     </execution>    
-    <execution id="26">      
+    <execution id="27">      
       <position height="24" width="195" x="228" y="651"/>    
     </execution>    
-    <execution id="28">      
+    <execution id="29">      
       <position height="24" width="195" x="228" y="712"/>    
     </execution>  
   </object>  
-  <object id="54" language="java" name="Manager.IMSManagerMenu3" project="InventoryManagementSystem" 
+  <object id="47" language="java" name="Manager.IMSManagerMenu3" project="InventoryManagementSystem" 
     file="/InventoryManagementSystem/src/Manager/IMSManagerMenu3.java" binary="false" label="imsManagerMenu3" 
     type="class" autoSize="true">    
     <position height="-1" width="-1" x="564" y="0"/>    
     <execution id="9">      
       <position height="24" width="160" x="427" y="208"/>    
     </execution>    
-    <execution id="32">      
+    <execution id="33">      
       <position height="24" width="160" x="427" y="930"/>    
     </execution>    
-    <execution id="34">      
+    <execution id="35">      
       <position height="24" width="160" x="427" y="964"/>    
-    </execution>    
-    <execution id="36">      
-      <position height="24" width="160" x="427" y="993"/>    
-    </execution>    
-    <execution id="38">      
-      <position height="24" width="160" x="427" y="1030"/>    
-    </execution>    
-    <execution id="40">      
-      <position height="24" width="160" x="427" y="1072"/>    
-    </execution>    
-    <execution id="42">      
-      <position height="24" width="160" x="427" y="1107"/>    
     </execution>  
   </object>  
-  <object id="55" language="java" name="Manager.IMSManagerMenu4" project="InventoryManagementSystem" 
+  <object id="48" language="java" name="Manager.IMSManagerMenu4" project="InventoryManagementSystem" 
     file="/InventoryManagementSystem/src/Manager/IMSManagerMenu4.java" binary="false" label="menu4manager" type="class" 
     autoSize="true">    
     <position height="0" width="0" x="0" y="0"/>    
     <execution id="11">      
       <position height="24" width="160" x="591" y="258"/>    
     </execution>    
-    <execution id="44">      
-      <position height="24" width="160" x="591" y="1266"/>    
+    <execution id="37">      
+      <position height="24" width="160" x="591" y="1096"/>    
     </execution>    
-    <execution id="46">      
-      <position height="24" width="160" x="591" y="1320"/>    
+    <execution id="39">      
+      <position height="24" width="160" x="591" y="1150"/>    
     </execution>    
-    <execution id="48">      
-      <position height="24" width="160" x="591" y="1372"/>    
+    <execution id="41">      
+      <position height="24" width="160" x="591" y="1202"/>    
     </execution>    
-    <execution id="50">      
-      <position height="24" width="160" x="591" y="1423"/>    
+    <execution id="43">      
+      <position height="24" width="160" x="591" y="1253"/>    
+    </execution>  
+  </object>  
+  <object id="49" language="java" name="Manager.IMSManagerMenu5" project="InventoryManagementSystem" 
+    file="/InventoryManagementSystem/src/Manager/IMSManagerMenu5.java" binary="false" label="imsManagerMenu5" 
+    type="class" autoSize="true">    
+    <position height="-1" width="-1" x="624" y="0"/>    
+    <execution id="25">      
+      <position height="24" width="160" x="755" y="1307"/>    
     </execution>  
   </object>  
   <message id="3" operation="startPoint():void" asynchronous="false">    
@@ -126,77 +119,65 @@
     <end type="SOURCE" refId="4"/>    
     <end type="TARGET" refId="15"/>  
   </message>  
-  <message id="17" operation="readDataFile(Implementation.IMSImplementation):void" asynchronous="false">    
+  <message id="16" operation="readDataFile(Implementation.IMSImplementation):void" asynchronous="false">    
     <end type="SOURCE" refId="15"/>    
-    <end type="TARGET" refId="18"/>  
+    <end type="TARGET" refId="17"/>  
   </message>  
-  <message id="19" operation="searchProduct():void" asynchronous="false">    
+  <message id="18" operation="searchProduct():void" asynchronous="false">    
     <end type="SOURCE" refId="15"/>    
-    <end type="TARGET" refId="20"/>  
+    <end type="TARGET" refId="19"/>  
   </message>  
-  <message id="21" operation="showInventoryMenu():void" asynchronous="false">    
+  <message id="20" operation="showInventoryMenu():void" asynchronous="false">    
     <end type="SOURCE" refId="15"/>    
-    <end type="TARGET" refId="22"/>  
+    <end type="TARGET" refId="21"/>  
   </message>  
-  <message id="23" operation="addRecordmenu():void" asynchronous="false">    
+  <message id="22" operation="addRecordmenu():void" asynchronous="false" x="154" y="1025">    
     <end type="SOURCE" refId="15"/>    
-    <end type="TARGET" refId="24"/>  
+    <end type="TARGET" refId="23"/>  
   </message>  
-  <message id="25" operation="searchByproductAndID(Implementation.IMSImplementation):void" asynchronous="false">    
-    <end type="SOURCE" refId="20"/>    
-    <end type="TARGET" refId="26"/>  
+  <message id="24" operation="triggerMail():void" asynchronous="false">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="25"/>  
   </message>  
-  <message id="27" operation="searchByOtherAttribute(Implementation.IMSImplementation):void" asynchronous="false">    
-    <end type="SOURCE" refId="20"/>    
-    <end type="TARGET" refId="28"/>  
+  <message id="26" operation="searchByproductAndID(Implementation.IMSImplementation):void" asynchronous="false">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="27"/>  
   </message>  
-  <message id="29" operation="startPoint():void" asynchronous="false">    
-    <end type="SOURCE" refId="20"/>    
-    <end type="TARGET" refId="30"/>  
+  <message id="28" operation="searchByOtherAttribute(Implementation.IMSImplementation):void" asynchronous="false">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="29"/>  
   </message>  
-  <message id="31" operation="showInventory(java.lang.String):void" asynchronous="false">    
-    <end type="SOURCE" refId="22"/>    
-    <end type="TARGET" refId="32"/>  
+  <message id="30" operation="startPoint():void" asynchronous="false">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="31"/>  
   </message>  
-  <message id="33" operation="showInventoryResults(java.lang.String,java.lang.String,int):void" asynchronous="false">    
-    <end type="SOURCE" refId="22"/>    
-    <end type="TARGET" refId="34"/>  
+  <message id="32" operation="showInventory(java.lang.String):void" asynchronous="false">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="33"/>  
   </message>  
-  <message id="35" asynchronous="false">    
-    <end type="SOURCE" refId="22"/>    
-    <end type="TARGET" refId="36"/>  
+  <message id="34" operation="showInventoryResults(java.lang.String,java.lang.String,int):void" asynchronous="false">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="35"/>  
   </message>  
-  <message id="37" asynchronous="false">    
-    <end type="SOURCE" refId="22"/>    
-    <end type="TARGET" refId="38"/>  
+  <message id="36" operation="addRecord(java.lang.String,java.io.BufferedReader):boolean" asynchronous="false">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="37"/>  
   </message>  
-  <message id="39" asynchronous="false">    
-    <end type="SOURCE" refId="22"/>    
-    <end type="TARGET" refId="40"/>  
-  </message>  
-  <message id="41" asynchronous="false">    
-    <end type="SOURCE" refId="22"/>    
-    <end type="TARGET" refId="42"/>  
-  </message>  
-  <message id="43" operation="addRecord(java.lang.String,java.io.BufferedReader):boolean" asynchronous="false">    
-    <end type="SOURCE" refId="24"/>    
-    <end type="TARGET" refId="44"/>  
-  </message>  
-  <message id="45" operation="deleteRecord(java.lang.String,java.lang.String,java.io.BufferedReader):boolean" 
+  <message id="38" operation="deleteRecord(java.lang.String,java.lang.String,java.io.BufferedReader):boolean" 
     asynchronous="false">    
-    <end type="SOURCE" refId="24"/>    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="39"/>  
+  </message>  
+  <message id="40" operation="modifyRecord(java.lang.String,java.io.BufferedReader):boolean" asynchronous="false">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="41"/>  
+  </message>  
+  <message id="42" operation="createBackup(java.lang.StringBuffer):void" asynchronous="false">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="43"/>  
+  </message>  
+  <message id="45" operation="defaultDataFileRead(Implementation.IMSImplementation):void" asynchronous="false">    
+    <end type="SOURCE" refId="17"/>    
     <end type="TARGET" refId="46"/>  
-  </message>  
-  <message id="47" operation="modifyRecord(java.lang.String,java.io.BufferedReader):boolean" asynchronous="false">    
-    <end type="SOURCE" refId="24"/>    
-    <end type="TARGET" refId="48"/>  
-  </message>  
-  <message id="49" operation="createBackup(java.lang.StringBuffer):void" asynchronous="false">    
-    <end type="SOURCE" refId="24"/>    
-    <end type="TARGET" refId="50"/>  
-  </message>  
-  <message id="52" operation="defaultDataFileRead(Implementation.IMSImplementation):void" asynchronous="false">    
-    <end type="SOURCE" refId="18"/>    
-    <end type="TARGET" refId="53"/>  
   </message>
 </sequence-diagram>

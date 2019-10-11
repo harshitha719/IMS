@@ -1,4 +1,5 @@
 package Manager;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -10,14 +11,46 @@ import java.io.PrintWriter;
 
 import Constant.IMSConstants;
 import Implementation.IMSImplementation;
-public class IMSManagerMenu4 {
-	private static File backupFile;	
 
+/**
+ * 
+ * @author Vartika S
+ * 
+ *         This manager class encloses methods to implement Add/update/Delete
+ *         features of the IMS.
+ *
+ */
+
+/*
+ * UML
+ * 
+ * - backupFile: File
+ * 
+ * + addRecord(String, BufferedReader): boolean + deleteRecord(String,
+ * BufferedReader): boolean + modifyRecord(String, BufferedReader): boolean +
+ * changeRecordPreprocessor(String): StringBuffer + createBackup(StringBuffer):
+ * void + displayInventory(String): File
+ * 
+ * 
+ */
+
+public class IMSManagerMenu4 {
+	private static File backupFile;
+
+	/**
+	 * 
+	 * @param filename
+	 * @param brReader
+	 * @return
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
 	public boolean addRecord(String filename, BufferedReader brReader) throws FileNotFoundException, IOException {
 
 		boolean updateFlag = false;
 		IMSImplementation.clearscr();
 
+		// Display inventory by default for the user.
 		File file = displayInventory(filename);
 		System.out.println("\n\n");
 
@@ -25,6 +58,9 @@ public class IMSManagerMenu4 {
 				+ "Product  Model	Manufacturer  typeCode  LocationCode	MSRP	UNITCOST	DISCOUNTRATE	QTY");
 		String record = brReader.readLine();
 		BufferedReader brd = new BufferedReader(new FileReader(file));
+
+		// This logic is to read the last record from the inventory and generate the
+		// next sequence ProductId to add the record.
 		String strg;
 		String lastRec = "";
 		while ((strg = brd.readLine()) != null) {
@@ -35,10 +71,14 @@ public class IMSManagerMenu4 {
 		Integer productId = Integer.parseInt(id) + 1;
 		id = productId.toString();
 		int idlen = id.length();
-		for (int i=0; i< 9-idlen; i++) {
+		for (int i = 0; i < 9 - idlen; i++) {
 			id = 0 + id;
 		}
+		// create the final record to write in file by concatenating the ProductId with
+		// delimiter.
 		record = "a" + id + IMSConstants.recordDelimiter + record;
+
+		// Write the record using bufferedWriteer
 		BufferedWriter bw = new BufferedWriter(new FileWriter(file, true));
 		bw.newLine();
 		bw.write(record);
@@ -49,6 +89,15 @@ public class IMSManagerMenu4 {
 		return updateFlag;
 	}
 
+	/**
+	 * 
+	 * @param filename
+	 * @param choice
+	 * @param brReader
+	 * @return
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
 	public boolean deleteRecord(String filename, String choice, BufferedReader brReader)
 			throws FileNotFoundException, IOException {
 
@@ -78,6 +127,10 @@ public class IMSManagerMenu4 {
 		String matchrec;
 		StringBuffer buff = new StringBuffer("");
 		boolean recordFound = false;
+
+		// read every record from file and split to fetch
+		// ProductId/Name/Model/Manufacturer. Match this with the requested delete by
+		// value provided y the user.
 		while ((strg = brd.readLine()) != null) {
 			String[] token = strg.split(IMSConstants.recordDelimiter);
 			if (token != null && token.length != 0) {
@@ -122,6 +175,14 @@ public class IMSManagerMenu4 {
 		return updateFlag;
 	}
 
+	/**
+	 * 
+	 * @param filename
+	 * @param brReader
+	 * @return
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
 	public boolean modifyRecord(String filename, BufferedReader brReader) throws FileNotFoundException, IOException {
 
 		boolean updateFlag = false;
@@ -144,6 +205,9 @@ public class IMSManagerMenu4 {
 		String matchrec = "";
 		boolean recordFound = false;
 		StringBuffer buff = new StringBuffer("");
+
+		// read every record from file and match against the value. Match this with the
+		// requested update value of MSRP, Discount or Quantity provided by the user.
 		while ((strg = brd.readLine()) != null) {
 			String[] token = strg.split(IMSConstants.recordDelimiter);
 
@@ -165,16 +229,20 @@ public class IMSManagerMenu4 {
 			switch (column) {
 			case "7":
 				for (int i = 0; i < recordToken.length; i++) {
+					// update to MSRP
 					if (i == 6)
 						buff.append(value).append(IMSConstants.recordDelimiter);
-					else if (i==7) {
+
+					// update to Unit Price based on MSRP update
+					else if (i == 7) {
 						Integer msrp = Integer.parseInt(value);
 						Integer unitCost;
 						Integer discount = Integer.parseInt(recordToken[8]);
 						unitCost = msrp - ((discount * msrp) / 100);
 						buff.append(unitCost.toString()).append(IMSConstants.recordDelimiter);
-					}
-					else
+
+						// keep the record as is for rest of the column values
+					} else
 						buff.append(recordToken[i]).append(IMSConstants.recordDelimiter);
 				}
 				buff.append("\n");
@@ -182,14 +250,20 @@ public class IMSManagerMenu4 {
 
 			case "9":
 				for (int i = 0; i < recordToken.length; i++) {
+
+					// update Unit Price based on updated discount rate
 					if (i == 7) {
 						Integer msrp = Integer.parseInt(recordToken[6]);
 						Integer unitCost;
 						Integer discount = Integer.parseInt(value);
 						unitCost = msrp - ((discount * msrp) / 100);
 						buff.append(unitCost.toString()).append(IMSConstants.recordDelimiter);
-					} else if (i == 8)
+					}
+					// update Discount rate
+					else if (i == 8)
 						buff.append(value).append(IMSConstants.recordDelimiter);
+
+					// keep the record as is for rest of the column values
 					else
 						buff.append(recordToken[i]).append(IMSConstants.recordDelimiter);
 				}
@@ -199,12 +273,14 @@ public class IMSManagerMenu4 {
 
 			case "10":
 				for (int i = 0; i < recordToken.length; i++) {
-					if (i == 7)
+
+					// update quantity of product
+					if (i == 9)
 						buff.append(value).append(IMSConstants.recordDelimiter);
 					else
 						buff.append(recordToken[i]).append(IMSConstants.recordDelimiter);
 				}
-				//buff.append("\n");
+				// buff.append("\n");
 
 				break;
 			default:
@@ -231,6 +307,15 @@ public class IMSManagerMenu4 {
 		return updateFlag;
 	}
 
+	/**
+	 * This method is a pre-processor which loads the inventory in memory. This will
+	 * be used to create a backup before the user exits the menu 4 options.
+	 * 
+	 * @param filename
+	 * @return
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
 	public StringBuffer changeRecordPreProcessor(String filename) throws FileNotFoundException, IOException {
 
 		StringBuffer strbf = new StringBuffer("");
@@ -261,6 +346,13 @@ public class IMSManagerMenu4 {
 
 	}
 
+	/**
+	 * This method will actually write to a backup file before exit.
+	 * 
+	 * @param buffer
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
 	public void createBackup(StringBuffer buffer) throws FileNotFoundException, IOException {
 
 		BufferedWriter bw = new BufferedWriter(new FileWriter(backupFile));
@@ -269,6 +361,15 @@ public class IMSManagerMenu4 {
 
 	}
 
+	/**
+	 * This is a utility method to display the complete inventory to user before he
+	 * makes any choice to update
+	 * 
+	 * @param filename
+	 * @return
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
 	private File displayInventory(String filename) throws FileNotFoundException, IOException {
 		File file = new File(filename);
 		BufferedReader br = new BufferedReader(new FileReader(file));

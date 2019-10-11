@@ -4,8 +4,8 @@
   router="FAN">  
   <class id="1" language="java" name="Main.Main" project="InventoryManagementSystem" 
     file="/InventoryManagementSystem/src/Main/Main.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="544" y="-28"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="135" width="109" x="317" y="5"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
@@ -13,7 +13,7 @@
   </class>  
   <class id="2" language="java" name="Implementation.IMSImplementation" project="InventoryManagementSystem" 
     file="/InventoryManagementSystem/src/Implementation/IMSImplementation.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="205" width="295" x="393" y="63"/>    
+    <position height="458" width="231" x="435" y="128"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -22,7 +22,7 @@
   </class>  
   <class id="3" language="java" name="Constant.IMSConstants" project="InventoryManagementSystem" 
     file="/InventoryManagementSystem/src/Constant/IMSConstants.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="293" width="262" x="1104" y="-58"/>    
+    <position height="180" width="189" x="787" y="150"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -31,7 +31,7 @@
   </class>  
   <class id="4" language="java" name="Manager.IMSManagerMenu1And2" project="InventoryManagementSystem" 
     file="/InventoryManagementSystem/src/Manager/IMSManagerMenu1And2.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="232" width="346" x="17" y="339"/>    
+    <position height="162" width="247" x="119" y="397"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -40,7 +40,7 @@
   </class>  
   <class id="5" language="java" name="Manager.IMSManagerMenu3" project="InventoryManagementSystem" 
     file="/InventoryManagementSystem/src/Manager/IMSManagerMenu3.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="223" width="417" x="462" y="344"/>    
+    <position height="147" width="230" x="645" y="637"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -49,63 +49,63 @@
   </class>  
   <class id="6" language="java" name="Manager.IMSManagerMenu4" project="InventoryManagementSystem" 
     file="/InventoryManagementSystem/src/Manager/IMSManagerMenu4.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1181" y="458"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="159" width="169" x="817" y="402"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
   <dependency id="7">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="2"/>  
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="5"/>  
   </dependency>  
-  <dependency id="8">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="2"/>  
-  </dependency>  
-  <association id="9">    
+  <association id="8">    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="10" name="manager">        
-        <position height="0" width="0" x="0" y="0"/>      
+      <attribute id="9" name="manager">        
+        <position height="0" width="0" x="64" y="58"/>      
       </attribute>      
-      <multiplicity id="11" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
+      <multiplicity id="10" minimum="0" maximum="1">        
+        <position height="0" width="0" x="64" y="58"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="12">    
-    <end type="SOURCE" refId="4"/>    
+  <dependency id="11">    
+    <end type="SOURCE" refId="6"/>    
     <end type="TARGET" refId="2"/>  
   </dependency>  
-  <dependency id="13">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="3"/>  
-  </dependency>  
-  <dependency id="14">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="5"/>  
-  </dependency>  
-  <association id="15">    
+  <association id="12">    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="16" name="menu4manager">        
-        <position height="0" width="0" x="0" y="0"/>      
+      <attribute id="13" name="menu4manager">        
+        <position height="0" width="0" x="-203" y="51"/>      
       </attribute>      
-      <multiplicity id="17" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
+      <multiplicity id="14" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-203" y="51"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="18">    
+  <dependency id="15">    
     <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="3"/>  
   </dependency>  
-  <dependency id="19">    
+  <dependency id="16">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <dependency id="17">    
     <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <dependency id="18">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <dependency id="19">    
+    <end type="SOURCE" refId="6"/>    
     <end type="TARGET" refId="3"/>  
   </dependency>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
