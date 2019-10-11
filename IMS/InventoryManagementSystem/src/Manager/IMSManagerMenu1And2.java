@@ -129,8 +129,8 @@ public class IMSManagerMenu1And2 {
 			Iterator it = imsImplementation.dataFileList.iterator();
 			while(it.hasNext()) {
 				String data = (String) it.next();
-				data = data.toLowerCase();
-				if(data.contains(otherAttribute.toLowerCase())) {
+				//data = data.toLowerCase();
+				if(data.contains(otherAttribute)) {
 					productExist = Boolean.TRUE;
 					System.out.println(data);
 				}
@@ -206,11 +206,13 @@ public class IMSManagerMenu1And2 {
 	 * @param trigger
 	 * @throws FileNotFoundException,IOException 
 	 */
-	private void fileReadToList(IMSImplementation imsImplementation,Boolean listClear,String trigger) throws FileNotFoundException,IOException {
+	private void fileReadToList(IMSImplementation imsImplementation,Boolean listClear,String trigger) throws IOException  {
 		String str;
 		//file is read and updated the arrayList. 
 		File file = new File(imsImplementation.getDataFile() + IMSConstants.TXT);
-		BufferedReader br = new BufferedReader(new FileReader(file));
+		BufferedReader br;
+		try {
+			br = new BufferedReader(new FileReader(file));
 		//list needs to cleared then we are re initializing the data list
 		if(listClear) {
 			imsImplementation.dataFileList = new ArrayList<String>();
@@ -225,8 +227,12 @@ public class IMSManagerMenu1And2 {
 				} else {
 					imsImplementation.searchList.add(str);
 				}
-			
+		}
 	}
+		catch (FileNotFoundException e) {
+			System.out.println("File Not Found  " + e.getMessage());
+		    imsImplementation.setDataFile(IMSConstants.HARDWARE);
+		}
 	}
 	/**
 	 * populateMapWithProductAndID
